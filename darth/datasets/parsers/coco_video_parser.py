@@ -6,6 +6,7 @@ from pycocotools.coco import _isArrayLike
 
 from . import COCO
 
+
 class CocoVID(COCO):
     """Inherit official COCO class in order to parse the annotations of bbox-
     related video tasks.

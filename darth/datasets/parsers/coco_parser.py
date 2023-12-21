@@ -7,6 +7,7 @@ def _isArrayLike(obj):
 
 from mmdet.datasets.api_wrappers import COCO as _COCO
 
+
 class COCO(_COCO):
     """Inherit mmdet COCO class to parse the annotations of bbox-related
     image tasks.

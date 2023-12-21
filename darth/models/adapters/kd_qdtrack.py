@@ -86,7 +86,6 @@ class KDQDTrack(TeacherQDTrack):
         Returns:
             dict[str : Tensor]: All losses.
         """
-        # TODO: create a separate one-stage qdtrack to use with yolox
         # basic assertions
         assert self.detector.with_rpn, "two-stage KDQDT must have rpn"
         assert self.with_teacher_detector, "teacher_detector must exist"
@@ -121,15 +120,11 @@ class KDQDTrack(TeacherQDTrack):
         # key frame forward
         x = self.detector.extract_feat(img)
         proposal_list = self.detector.rpn_head.simple_test_rpn(x, img_metas)
-        # det_results = self.detector.roi_head.simple_test(
-        #     x, proposal_list, img_metas, rescale=False)
 
         # ref frame forward
         ref_x = self.detector.extract_feat(ref_img)
         ref_proposal_list = self.detector.rpn_head.simple_test_rpn(
             ref_x, ref_img_metas)
-        # ref_det_results = self.detector.roi_head.simple_test(
-        #     ref_x, ref_proposal_list, ref_img_metas, rescale=False)
 
         # rpn distillation loss
         if (

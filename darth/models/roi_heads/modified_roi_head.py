@@ -34,7 +34,6 @@ class ModifiedRoIHead(StandardRoIHead):
 
         # some detector with_reg is False, bbox_pred will be None
         if bbox_pred is not None:
-            # TODO move this to a sabl_roi_head
             # the bbox prediction of some detectors like SABL is not Tensor
             if isinstance(bbox_pred, torch.Tensor):
                 bbox_pred = bbox_pred.split(num_proposals_per_img, 0)

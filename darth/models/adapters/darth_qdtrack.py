@@ -132,7 +132,7 @@ def drop_empty_images(
 
 @MODELS.register_module()
 class DARTHQDTrack(KDQDTrack):
-    """Implementation of DARTH, a domain adaptive MOT framework based on `QDTrack
+    """Implementation of `DARTH <https://arxiv.org/abs/2310.01926>`_, a domain adaptive MOT framework based on `QDTrack
     <https://arxiv.org/abs/2006.06664>`_.
     Args:
         transforms list(dict): Configuration of transforms for data augmentation
@@ -336,7 +336,6 @@ class DARTHQDTrack(KDQDTrack):
         Returns:
             dict[str : TensorNone]: All losses.
         """
-        # TODO: create a separate one-stage qdtrack to use with yolox
         # basic assertions
         assert self.detector.with_rpn, "two-stage KDQDT must have rpn"
         assert self.with_teacher_detector, "teacher_detector must exist"
@@ -362,8 +361,6 @@ class DARTHQDTrack(KDQDTrack):
         # key frame forward
         s_x = self.detector.extract_feat(s_img)
         s_proposal_list = self.detector.rpn_head.simple_test_rpn(s_x, s_img_metas)
-        # s_det_results = self.detector.roi_head.simple_test(
-        #     s_x, s_proposal_list, s_img_metas, rescale=False)
 
         # rpn distillation loss
         if (
@@ -392,9 +389,6 @@ class DARTHQDTrack(KDQDTrack):
                 roi_outs, teacher_roi_outs)
             losses.update({"roi_distillation_loss": roi_distillation_loss})
 
-        # TODO: 
-        # (i) change this with adding dummy boxes (replace empty boxes [] with [0.0,0.0,1.0,1.0])
-        # (ii) returning a weight vector to multiply the loss by (=0 where dummy vector, =1 elsewhere)
         (
             s_img, s_bboxes, s_labels, s_match_indices, s_img_metas, s_bboxes_ignore,
             c_img, c_bboxes, c_labels, c_match_indices, c_img_metas, c_bboxes_ignore,
@@ -402,24 +396,7 @@ class DARTHQDTrack(KDQDTrack):
             s_img, s_bboxes, s_labels, s_match_indices, s_img_metas, s_bboxes_ignore,
             c_img, c_bboxes, c_labels, c_match_indices, c_img_metas, c_bboxes_ignore,
         )
-        # #
-        # import matplotlib.pyplot as plt
-        # from ..utils import get_det_im
-        # imgs = []
-        # columns = 3
-        # rows = img.shape[0]
-        # for i in range(0, rows):
-        #     imgs.append(get_det_im(img, gt_bboxes, gt_labels, i))
-        #     imgs.append(get_det_im(s_img, s_bboxes, s_labels, i))
-        #     imgs.append(get_det_im(c_img, c_bboxes, c_labels, i))
-        # fig = plt.figure(figsize=(8, 8))
-        # for i in range(0, rows*columns):
-        #     fig.add_subplot(rows, columns, i+1)
-        #     plt.imshow(imgs[i])
-        #     plt.axis('off')
-        # plt.show()
- 
-        # TODO: remove condition
+        
         if (
             s_img is not None and (
                 self.track_head.embed_head.loss_track.loss_weight > 0 or
@@ -429,10 +406,6 @@ class DARTHQDTrack(KDQDTrack):
             c_x = self.detector.extract_feat(c_img)
             c_proposal_list = self.detector.rpn_head.simple_test_rpn(
                 c_x, c_img_metas)
-            # ref_det_results = self.detector.roi_head.simple_test(
-            #     ref_x, ref_proposal_list, ref_img_metas, rescale=False)
-
-            # TODO: allow passing element-wise weight vector for loss
             track_losses = self.track_head.forward_train(
                 s_x, s_img_metas, s_proposal_list, s_bboxes, s_labels,
                 s_match_indices, c_x, c_img_metas, c_proposal_list,
