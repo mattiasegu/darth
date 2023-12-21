@@ -67,7 +67,7 @@ We provide config files and pre-trained weights for QDTrack models trained on a 
 | MOT17 | 57.2 | 68.2 |  57.1 | 68.5 | 57.4 | [config](https://github.com/mattiasegu/darth/blob/main/configs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_4e_mot17-private-half.py) | [weights](https://drive.google.com/file/d/11O0QjRexO78k-GquSLTRH8rVq4YQ9qni/view?usp=drive_link) |
 | MOT17 (+ CH) | 59.8 | 71.7 |  59.7 | 71.6 | 58.7 | [config](https://github.com/mattiasegu/darth/blob/main/configs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_4e_crowdhuman_mot17-private-half.py) | [weights](https://drive.google.com/file/d/1tP6dIaazHA5ViwECodgvI0s5R5Y6wVCs/view?usp=drive_link) |
 | DanceTrack | 68.5 | 79.2 |  43.5 | 42.3 | 28.0 | [config](https://github.com/mattiasegu/darth/blob/main/configs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_4e_dancetrack.py) | [weights](https://drive.google.com/file/d/1x_CU_EFC1GyjKDM3WnmBF5jyOzSE_JcG/view?usp=drive_link) |
-| BDD100K (ped.) | 36.5 | 14.2 |  39.6 | 48.2 | 43.3 | [config](chttps://github.com/mattiasegu/darth/blob/main/onfigs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_12e_bdd_pedestrian_track_det.py) | [weights](https://drive.google.com/file/d/1CFhYegtJ-MPP2eh9IeUWeixEa5py1Q_O/view?usp=drive_link) |
+| BDD100K (ped.) | 36.5 | 14.2 |  39.6 | 48.2 | 43.3 | [config](https://github.com/mattiasegu/darth/blob/main/configs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_12e_bdd_pedestrian_track_det.py) | [weights](https://drive.google.com/file/d/1CFhYegtJ-MPP2eh9IeUWeixEa5py1Q_O/view?usp=drive_link) |
 
 
 ## Test-time Adaptation (DARTH)
