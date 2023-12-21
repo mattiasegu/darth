@@ -31,7 +31,7 @@ pip install git+https://github.com/TAO-Dataset/tao.git
 pip install -r tools/install/requirements.txt
 pip install git+https://github.com/SysCV/shift-dev.git
 pip install git+https://github.com/bdd100k/bdd100k.git
-pip install git+https://github.com/scalabel/scalabel.git
+pip install git+https://github.com/scalabel/scalabel.git@v0.3.0
 pip install git+https://github.com/SysCV/tet.git#egg=teta\&subdirectory=teta
 
 # setup darth
