@@ -1,0 +1,22 @@
+remove_ignored = true
+ignored_as_class = false
+
+[name_mapping]
+vehicle = "car"
+cyclist = "rider"
+pedestrian = "pedestrian"
+
+[scalabel]
+    [scalabel.imageSize]
+    height = 720
+    width = 1280
+
+    [[scalabel.attributes]]
+    name = "crowd"
+    type = "switch"
+    tag = "c"
+
+    [[scalabel.categories]]
+    name = "human"
+        [[scalabel.categories.subcategories]]
+        name = "pedestrian"
